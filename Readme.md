@@ -10,28 +10,36 @@ Creates public and private subnets
 Creates an Internet Gateway (IGW) for public subnets
 Sets up route tables for public subnets
 
-# Usage :
+# USAGE
+```
+provider "aws" {
+  region = "eu-north-1"
+}
 
-'''
-module "vpn" {
-    source = "./modules/vpc"
-    vpc_config = {
-      cidr_block = "10.0.0.0/16"
-      Name = "your_vpc_name"
+module "vpc" {
+  source = "./module/vpc"
+
+  vpc_config = {
+    cidr_block = "10.0.0.0/16"
+    name       = "my-test-vpc"
+  }
+  subnet_config = {
+    public_subnet-1 = {
+      cidr_block = "10.0.0.0/24"
+      az         = "eu-north-1a"
+      public     = true
     }
-subnet_config = {
-  subnet = {
-    cidr_block = "10.0.0.0/24"
-    az         = "eu-north-1a"
-    #To set the subnet public , default is private
-    public     = true
-  },
-  subnet2 = {
-    cidr_block = "10.0.1.0/24"
-    az         = "eu-north-1b"
-    public     = false
+    public_subnet-2 = {
+      cidr_block = "10.0.2.0/24"
+      az         = "eu-north-1a"
+      public     = true
+    }
+
+    private_subnet = {
+      cidr_block = "10.0.1.0/24"
+      az         = "eu-north-1b"
+    }
   }
 }
 
-}
-'''
+```
