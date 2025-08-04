@@ -10,7 +10,7 @@ Creates public and private subnets
 Creates an Internet Gateway (IGW) for public subnets
 Sets up route tables for public subnets
 
-# USAGE
+USAGE
 ```
 provider "aws" {
   region = "eu-north-1"
